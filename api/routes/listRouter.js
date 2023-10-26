@@ -1,7 +1,7 @@
 import express from "express";
-import getBeers from "../controllers/getBeers.js";
+import getList from "../controllers/getList.js";
 const beerRouter = express.Router();
 
-beerRouter.get('/beers', getBeers);
+beerRouter.get('/list', getList);
 
 export default beerRouter;

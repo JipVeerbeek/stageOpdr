@@ -1,13 +1,13 @@
 import { pool } from "../connection.js";
 
-const getBeers = (req, res) => {
+const getList = (req, res) => {
   pool.getConnection((err, connection) => {
     if (err) {
       res.status(400).json({ error: 'connection_error' });
       return;
     }
 
-    const query = "SELECT name, breweries.brewery_name as brewery_name, type, rating from beers JOIN breweries ON beers.brewery_id=breweries.id";
+    const query = "SELECT * from list";
 
     connection.query(query, (err, rows) => {
       connection.release();
@@ -23,4 +23,4 @@ const getBeers = (req, res) => {
   });
 };
 
- export default getBeers;
+ export default getList;
