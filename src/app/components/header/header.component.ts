@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class headerComponent {
-  title: string;
+export class HeaderComponent {
 
-  constructor() {
-    this.title = "ToDo List";
-  }
 }
