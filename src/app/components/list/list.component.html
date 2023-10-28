@@ -1,1 +1,15 @@
-<p>list works!</p>
+<div *ngIf="data | async as list">
+  <div class="container">
+    <div class="listHead">listHead</div>
+    <!-- <div class="tableBox"> -->
+
+        <table class="tableStyle">
+            <tr *ngFor="let item of list">
+                <td>{{ item.id }}</td>
+                <td>{{ item.task }}</td>
+                <td>{{ item.finished }}</td>
+            </tr>
+        </table>
+    </div>
+  <!-- </div> -->
+</div>

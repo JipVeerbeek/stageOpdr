@@ -1,10 +1,11 @@
 .headerBox {
     text-align: center;
     background-color: yellow;
-    width: 80%;
+    width: 40%;
     margin: auto;
     box-shadow: 5px 4px 4px gray;
     border-radius: 2px;
+    margin-bottom: 20px;
 }
 
 .headerText {

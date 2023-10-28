@@ -1,0 +1,24 @@
+.container{
+    margin: auto;
+    width: 40%;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+}
+
+.listHead{
+    text-align: center;
+    width: 100%;
+}
+
+.tableStyle{
+    border-collapse: collapse;
+    background-color: antiquewhite;
+    width: 50%;
+    margin: auto;
+}
+
+.tableStyle td {
+    border: 1px solid black;
+    
+}
