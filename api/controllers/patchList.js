@@ -3,6 +3,7 @@ import { pool } from "../connection.js";
 const patchList = (req, res) => {
   const checked = req.body;
   const id = req.params.id;
+  //   console.log(req.body);
 
   if (checked === undefined || id === undefined) {
     return res.status(400).json({ error: "Missing parameters" });
