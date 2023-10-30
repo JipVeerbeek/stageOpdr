@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -8,11 +7,28 @@ import { Observable } from 'rxjs';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent {
-  data: Observable<any>;
+  data: any;
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) {
-    this.data = this.http.get("http://localhost:3000/api/list");
+  ngOnInit() {
+    // Fetch the data when the component initializes
+    this.http.get('http://localhost:3000/api/list').subscribe((responseData) => {
+      this.data = responseData;
+      // console.log(this.data)
+    });
   }
+
+  onCheckboxChange(item: any) {
+
+    console.log(item.id + "-" + item.checked)
+
+    this.http.patch(`http://localhost:3000/api/list/` + item.id, { checked: item.checked }).subscribe((response) => {
+      console.log(response);
+    });
+  }
+
+
+
 }
 
 

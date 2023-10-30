@@ -3,7 +3,7 @@ import { pool } from "../connection.js";
 const getList = (req, res) => {
   pool.getConnection((err, connection) => {
     if (err) {
-      res.status(400).json({ error: 'connection_error' });
+      res.status(400).json({ error: "connection_error" });
       return;
     }
 
@@ -13,14 +13,14 @@ const getList = (req, res) => {
       connection.release();
 
       if (err) {
-        res.status(400).json({ error: 'query_error' });
+        res.status(400).json({ error: "query_error" });
         return;
       } else {
         res.json(rows);
-        // console.log(rows)
+        // console.log(rows);
       }
     });
   });
 };
 
- export default getList;
+export default getList;
