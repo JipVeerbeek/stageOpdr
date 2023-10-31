@@ -1,9 +1,8 @@
 import { pool } from "../connection.js";
 
 const patchList = (req, res) => {
-  const checked = req.body;
+  const checked = req.body.checked;
   const id = req.params.id;
-  //   console.log(req.body);
 
   if (checked === undefined || id === undefined) {
     return res.status(400).json({ error: "Missing parameters" });
@@ -25,7 +24,14 @@ const patchList = (req, res) => {
         res.status(400).json({ error: "query_error" });
         return;
       } else {
-        res.json({ message: "Updated" });
+        const selectQuery = "SELECT * FROM list WHERE id = ?";
+        connection.query(selectQuery, [id], (err, updatedData) => {
+          if (err) {
+            res.status(400).json({ error: "query_error" });
+          } else {
+            res.json({ message: "Updated", data: updatedData });
+          }
+        });
       }
     });
   });

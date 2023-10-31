@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent {
+export class ListComponent implements OnInit {
   data: any;
   constructor(private http: HttpClient) {}
 
@@ -15,7 +15,8 @@ export class ListComponent {
     this.http.get('http://localhost:3000/api/list').subscribe((responseData) => {
       this.data = responseData;
       // console.log(this.data)
-    });
+    }
+    );
   }
 
   onCheckboxChange(item: any) {
@@ -24,7 +25,11 @@ export class ListComponent {
 
     this.http.patch(`http://localhost:3000/api/list/` + item.id, { checked: item.checked }).subscribe((response) => {
       console.log(response);
-    });
+    },
+    (error) => {
+      console.error('Error updating checkbox:', error);
+    }
+    );
   }
 
 
