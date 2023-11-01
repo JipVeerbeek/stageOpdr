@@ -32,6 +32,10 @@ export class ListComponent implements OnInit {
     );
   }
 
+  addItem() {
+    console.log("test")
+  }
+
 
 
 }

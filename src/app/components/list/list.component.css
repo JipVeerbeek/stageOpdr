@@ -1,39 +1,45 @@
 .container {
-    margin: auto;
-    width: 80vw;
-    background-color: rgb(200, 200, 200);
-    display: flex;
-    flex-direction: column;
-    border-radius: 3px;
-    box-shadow: 5px 4px 4px gray;
+  margin: auto;
+  width: 80vw;
+  background-color: rgb(200, 200, 200);
+  display: flex;
+  flex-direction: column;
+  border-radius: 3px;
+  box-shadow: 5px 4px 4px gray;
 
-  }
-  
-  .tableContainer {
-    display: flex;
 }
   
-  .tableBox {
-    flex: 1;
-    margin: 20px;
-    align-items: center;
-  }
-  
-  .listHead {
-    text-align: center;
-    width: 100%;
-    font-size: x-large;
-    padding-bottom: 15px;
-  }
-  
-  .tableStyle {
-    border-collapse: collapse;
-    width: 100%;
+.tableContainer {
+  display: flex;
 }
   
-  .tableStyle td {
-    background-color: whitesmoke;
-    border-radius: 3px;
-    border: 1px solid lightgray;
-    padding: 10px;
-  }
+.tableBox {
+  flex: 1;
+  margin: 20px;
+  align-items: center;
+}
+  
+.listHead {
+  text-align: center;
+  width: 100%;
+  font-size: x-large;
+  padding-bottom: 15px;
+}
+
+.tableStyle {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tableStyle td {
+  background-color: whitesmoke;
+  border-radius: 3px;
+  border: 1px solid lightgray;
+  padding: 10px;
+}
+
+.addItem {
+  text-align: right;
+  padding: 10px;
+  padding-bottom: 0px;
+}
