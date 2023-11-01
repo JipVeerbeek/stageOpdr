@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class CreateComponent {
   isVisible = false;
   task: string = '';
+
   openPopup() {
     this.isVisible = true;
   }
@@ -16,7 +17,6 @@ export class CreateComponent {
     this.isVisible = false;
   }
 
-  
 
   onSubmit() {
     // Access the form data through the 'task' property

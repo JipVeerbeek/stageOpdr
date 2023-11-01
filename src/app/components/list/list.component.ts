@@ -9,11 +9,12 @@ import { CreateComponent } from './../create/create.component';
 })
 export class ListComponent implements OnInit {
   data: any;
+  source: string = "http://localhost:3000/api/"
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
     // Fetch the data when the component initializes
-    this.http.get('http://localhost:3000/api/list').subscribe((responseData) => {
+    this.http.get(this.source + 'list').subscribe((responseData) => {
       this.data = responseData;
       console.log(this.data)
     }
