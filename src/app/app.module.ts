@@ -6,14 +6,14 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ListComponent } from './components/list/list.component';
 import { FormsModule } from '@angular/forms';
-import { AddTaskComponent } from './components/add-task/add-task.component';
+import { CreateComponent } from './components/create/create.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ListComponent,
-    AddTaskComponent
+    CreateComponent
   ],
   imports: [
     BrowserModule,

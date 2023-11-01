@@ -1,7 +1,5 @@
 <div class="container">
-  <div class="addItem">
-    <button (click)="addItem()">Add new task</button>
-  </div>
+  
   <div class="tableContainer">
     <div class="tableBox">
       <div class="listHead">To Do<hr /></div>
@@ -40,5 +38,9 @@
       </table>
     </div>
   </div>
-  
+  <div class="addItem">
+    <button (click)="showPopup()">Add new task</button>
+    <app-create #popup></app-create>
+  </div>
+
 </div>

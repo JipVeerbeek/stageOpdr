@@ -1,0 +1,11 @@
+<div *ngIf="isVisible">
+    <div class="container">
+      <form (ngSubmit)="onSubmit()">
+        <label for="task">Task:&nbsp;&nbsp;&nbsp;</label>
+        <input type="text" id="task" name="task" [(ngModel)]="task"><br><br>
+        <input type="submit" value="Add">&nbsp;
+        <button (click)="closePopup()">Close</button>
+      </form>
+      
+    </div>
+  </div>

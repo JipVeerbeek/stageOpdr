@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CreateComponent } from './../create/create.component';
 
 @Component({
   selector: 'app-list',
@@ -31,9 +32,12 @@ export class ListComponent implements OnInit {
     }
     );
   }
+ 
+  @ViewChild('popup') create!: CreateComponent;
 
-  addItem() {
-    console.log("test")
+  showPopup() {
+    this.create.openPopup();
+
   }
 
 
