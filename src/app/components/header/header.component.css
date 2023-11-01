@@ -1,9 +1,9 @@
 .headerBox {
     text-align: center;
     background-color: yellow;
-    width: 40%;
+    width: 80vw;
     margin: auto;
-    box-shadow: 5px 4px 4px gray;
+    box-shadow: 5px 0px 4px gray;
     border-radius: 2px;
     margin-bottom: 20px;
 }

@@ -1,18 +1,40 @@
 <div class="container">
-  <div class="listHead">listHead</div>
-
-  <table class="tableStyle">
-    <tr *ngFor="let item of data">
-      <td>{{ item.id }}</td>
-      <td>{{ item.task }}</td>
-      <td>
-        <input
-          type="checkbox"
-          [id]="'box' + item.id"
-          [(ngModel)]="item.checked"
-          (change)="onCheckboxChange(item)"
-        />
-      </td>
-    </tr>
-  </table>
+  <div class="tableContainer">
+    <div class="tableBox">
+      <div class="listHead">To Do</div>
+      <table class="tableStyle">
+        <tr *ngFor="let item of data">
+          <ng-container *ngIf="item.checked == false">
+            <td>{{ item.task }}</td>
+            <td>
+              <input
+                type="checkbox"
+                [id]="'box' + item.id"
+                [(ngModel)]="item.checked"
+                (change)="onCheckboxChange(item)"
+              />
+            </td>
+          </ng-container>
+        </tr>
+      </table>
+    </div>
+    <div class="tableBox">
+      <div class="listHead">Done</div>
+      <table class="tableStyle">
+        <tr *ngFor="let item of data">
+          <ng-container *ngIf="item.checked == true">
+            <td>{{ item.task }}</td>
+            <td>
+              <input
+                type="checkbox"
+                [id]="'box' + item.id"
+                [(ngModel)]="item.checked"
+                (change)="onCheckboxChange(item)"
+              />
+            </td>
+          </ng-container>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>

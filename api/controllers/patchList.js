@@ -20,19 +20,8 @@ const patchList = (req, res) => {
     connection.query(query, values, (err, result) => {
       connection.release();
 
-      if (err) {
-        res.status(400).json({ error: "query_error" });
-        return;
-      } else {
-        const selectQuery = "SELECT * FROM list WHERE id = ?";
-        connection.query(selectQuery, [id], (err, updatedData) => {
-          if (err) {
-            res.status(400).json({ error: "query_error" });
-          } else {
-            res.json({ message: "Updated", data: updatedData });
-          }
-        });
-      }
+      if (err) return res.status(400).json({ error: "query_error" });
+      res.send(result);
     });
   });
 };

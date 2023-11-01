@@ -14,7 +14,7 @@ export class ListComponent implements OnInit {
     // Fetch the data when the component initializes
     this.http.get('http://localhost:3000/api/list').subscribe((responseData) => {
       this.data = responseData;
-      // console.log(this.data)
+      console.log(this.data)
     }
     );
   }

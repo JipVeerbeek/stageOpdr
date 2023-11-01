@@ -1,24 +1,39 @@
-.container{
+.container {
     margin: auto;
-    width: 40%;
-    background-color: whitesmoke;
+    width: 80vw;
+    background-color: rgb(200, 200, 200);
     display: flex;
     flex-direction: column;
-}
+    border-radius: 3px;
+    box-shadow: 5px 4px 4px gray;
 
-.listHead{
+  }
+  
+  .tableContainer {
+    display: flex;
+}
+  
+  .tableBox {
+    flex: 1;
+    margin: 20px;
+    align-items: center;
+  }
+  
+  .listHead {
     text-align: center;
     width: 100%;
-}
-
-.tableStyle{
+    font-size: x-large;
+    padding-bottom: 15px;
+  }
+  
+  .tableStyle {
     border-collapse: collapse;
-    background-color: antiquewhite;
-    width: 50%;
-    margin: auto;
+    width: 100%;
 }
-
-.tableStyle td {
-    border: 1px solid black;
-    
-}
+  
+  .tableStyle td {
+    background-color: whitesmoke;
+    border-radius: 3px;
+    border: 1px solid lightgray;
+    padding: 10px;
+  }
