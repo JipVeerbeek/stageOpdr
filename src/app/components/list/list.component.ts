@@ -51,6 +51,10 @@ export class ListComponent implements OnInit {
     
   }
 
+  editTask(item: any) {
+    
+  }
+
 }
 
 
