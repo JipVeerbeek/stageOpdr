@@ -7,6 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { ListComponent } from './components/list/list.component';
 import { FormsModule } from '@angular/forms';
 import { CreateComponent } from './components/create/create.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CreateComponent } from './components/create/create.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

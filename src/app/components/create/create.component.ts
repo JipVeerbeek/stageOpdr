@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-create',
@@ -7,7 +10,8 @@ import { Component } from '@angular/core';
 })
 export class CreateComponent {
   isVisible = false;
-  task: string = '';
+  task: string = "";
+  taskForm: FormGroup;
 
   openPopup() {
     this.isVisible = true;
@@ -16,12 +20,29 @@ export class CreateComponent {
   closePopup() {
     this.isVisible = false;
   }
-
+  
+  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+    this.taskForm = this.formBuilder.group({
+      task: [""]
+    });
+  }
 
   onSubmit() {
-    // Access the form data through the 'task' property
-    console.log('Task:', this.task);
+    // console.log('Task:', this.taskForm.value.task);
+
+    const data = this.taskForm.value.task;
+    if (data === "") return window.alert("Task is empty");
+    this.http.post(`http://localhost:3000/api/list`, { task: data}).subscribe((response) => {
+      console.log(response);
+    },
+    (error) => {
+      console.error('Error posting task:', error);
+    }
+    );
+    // this.taskForm.reset();
+    location.reload();
   }
+
 
 
 }

@@ -1,18 +1,16 @@
 import { pool } from "../connection.js";
 
-const patchList = (req, res) => {
-  const checked = req.body.checked;
-  const id = req.params.id;
-
-  if (checked === undefined || id === undefined) {
-    return res.status(400).json({ error: "Missing parameters" });
+const postList = (req, res) => {
+  const task = req.body.task;
+  if (task === "") {
+    return res.status(400).json({ error: "Task is empty" });
   }
 
   pool.getConnection((err, connection) => {
     if (err) return res.status(400).json({ error: "connection_error" });
 
-    const query = "UPDATE list SET checked = ? WHERE id = ?";
-    const values = [checked, id];
+    const query = "INSERT INTO `list` (`task`) VALUES (?)";
+    const values = [task];
 
     connection.query(query, values, (err, result) => {
       connection.release();
@@ -24,4 +22,4 @@ const patchList = (req, res) => {
   });
 };
 
-export default patchList;
+export default postList;
