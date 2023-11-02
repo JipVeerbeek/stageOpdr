@@ -42,3 +42,8 @@
   text-align: left;
   padding: 10px;
 }
+
+.actionStyle {
+  padding: 0;
+  text-align: center;
+}

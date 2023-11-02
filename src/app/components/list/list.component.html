@@ -1,13 +1,15 @@
 <div class="container">
-  
   <div class="tableContainer">
     <div class="tableBox">
-      <div class="listHead">To Do<hr /></div>
+      <div class="listHead">
+        To Do
+        <hr />
+      </div>
       <table class="tableStyle">
         <tr *ngFor="let item of data">
           <ng-container *ngIf="item.checked == false">
             <td>{{ item.task }}</td>
-            <td>
+            <td class="actionStyle">
               <input
                 type="checkbox"
                 [id]="'box' + item.id"
@@ -15,23 +17,32 @@
                 (change)="onCheckboxChange(item)"
               />
             </td>
+            <td class="actionStyle">
+              <button (click)="deleteTask(item)">delete</button>
+            </td>
           </ng-container>
         </tr>
       </table>
     </div>
     <div class="tableBox">
-      <div class="listHead">Done<hr /></div>
+      <div class="listHead">
+        Done
+        <hr />
+      </div>
       <table class="tableStyle">
         <tr *ngFor="let item of data">
           <ng-container *ngIf="item.checked == true">
             <td>{{ item.task }}</td>
-            <td>
+            <td class="actionStyle">
               <input
                 type="checkbox"
                 [id]="'box' + item.id"
                 [(ngModel)]="item.checked"
                 (change)="onCheckboxChange(item)"
-              />
+              />&nbsp;
+            </td>
+            <td class="actionStyle">
+              <button (click)="deleteTask(item)">delete</button>
             </td>
           </ng-container>
         </tr>
@@ -42,5 +53,4 @@
     <button (click)="showPopup()">Add new task</button>
     <app-create #popup></app-create>
   </div>
-
 </div>

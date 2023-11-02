@@ -13,7 +13,6 @@ export class ListComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    // Fetch the data when the component initializes
     this.http.get(this.source + 'list').subscribe((responseData) => {
       this.data = responseData;
       console.log(this.data)
@@ -38,10 +37,19 @@ export class ListComponent implements OnInit {
 
   showPopup() {
     this.create.openPopup();
-
   }
 
-
+  deleteTask(item: any) {
+    if (window.confirm('Delete task: ' + item.task)) {
+      this.http.delete(`http://localhost:3000/api/list/` + item.id).subscribe((response) => {
+        console.log(response)
+      },
+      (error) => {
+        console.error('Error deleting task:', error);
+      });
+    }
+    
+  }
 
 }
 
