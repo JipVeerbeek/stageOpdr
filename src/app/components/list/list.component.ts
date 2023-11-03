@@ -47,6 +47,7 @@ export class ListComponent implements OnInit {
       (error) => {
         console.error('Error deleting task:', error);
       });
+      location.reload()
     }
     
   }
