@@ -1,1 +1,15 @@
-<p>edit works!</p>
+<div class="container">
+  <div class="box">
+    <div class="fHead">
+      Edit Task
+      <hr />
+    </div>
+    <br />
+    <form [formGroup]="editTaskForm" (ngSubmit)="onSubmit()">
+      <label for="task">Task:&nbsp;&nbsp;&nbsp;</label>
+      <input type="text" formControlName="task" /><br /><br />
+      <input type="submit" value="Save" />&nbsp;
+      <button (click)="backButton()">Cancel</button>
+    </form>
+  </div>
+</div>

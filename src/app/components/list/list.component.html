@@ -55,7 +55,7 @@
     <button (click)="openPopup()">Add new task</button>
     <div *ngIf="isVisible">
       <div class="container">
-        <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="newTaskForm" (ngSubmit)="onSubmit()">
           <label for="task">Task:&nbsp;&nbsp;&nbsp;</label>
           <input type="text" formControlName="task"><br><br>
           <input type="submit" value="Add">&nbsp;

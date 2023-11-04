@@ -14,11 +14,11 @@ export class ListComponent {
   source: string = "http://localhost:3000/api/"
   isVisible = false;
   task: string = "";
-  taskForm: FormGroup;
+  newTaskForm: FormGroup;
 
   // Constructor
   constructor(private http: HttpClient, private router: Router, private formBuilder: FormBuilder) {
-    this.taskForm = this.formBuilder.group({
+    this.newTaskForm = this.formBuilder.group({
       task: [""]
     });
   }
@@ -58,7 +58,7 @@ export class ListComponent {
   // Create new task after submit
   onSubmit() {
 
-    const data = this.taskForm.value.task;
+    const data = this.newTaskForm.value.task;
     if (data === "") return window.alert("Task is empty");
     this.http.post(this.source + 'list', { task: data}).subscribe((response) => {
       console.log(response);
