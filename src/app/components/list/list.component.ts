@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CreateComponent } from './../create/create.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -10,7 +11,7 @@ import { CreateComponent } from './../create/create.component';
 export class ListComponent implements OnInit {
   data: any;
   source: string = "http://localhost:3000/api/"
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
     this.http.get(this.source + 'list').subscribe((responseData) => {
@@ -53,7 +54,7 @@ export class ListComponent implements OnInit {
   }
 
   editTask(item: any) {
-    
+    this.router.navigate(['edit', item.id]);
   }
 
 }
