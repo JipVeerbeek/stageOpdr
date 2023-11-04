@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { CreateComponent } from './../create/create.component';
 import { ListComponent } from '../list/list.component';
 
 @Component({

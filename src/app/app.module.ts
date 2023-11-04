@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ListComponent } from './components/list/list.component';
 import { FormsModule } from '@angular/forms';
-import { CreateComponent } from './components/create/create.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditComponent } from './components/edit/edit.component';
 
@@ -15,7 +14,6 @@ import { EditComponent } from './components/edit/edit.component';
     AppComponent,
     HomeComponent,
     ListComponent,
-    CreateComponent,
     EditComponent
   ],
   imports: [

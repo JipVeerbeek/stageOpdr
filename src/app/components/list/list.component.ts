@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CreateComponent } from './../create/create.component';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,11 +8,22 @@ import { Router } from '@angular/router';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
+  
   data: any;
   source: string = "http://localhost:3000/api/"
-  constructor(private http: HttpClient, private router: Router) {}
+  isVisible = false;
+  task: string = "";
+  taskForm: FormGroup;
 
+  // Constructor
+  constructor(private http: HttpClient, private router: Router, private formBuilder: FormBuilder) {
+    this.taskForm = this.formBuilder.group({
+      task: [""]
+    });
+  }
+
+  // Get request
   ngOnInit() {
     this.http.get(this.source + 'list').subscribe((responseData) => {
       this.data = responseData;
@@ -21,11 +32,12 @@ export class ListComponent implements OnInit {
     );
   }
 
+  // update true or false (done or todo)
   onCheckboxChange(item: any) {
 
     console.log(item.id + "-" + item.checked)
 
-    this.http.patch(`http://localhost:3000/api/list/` + item.id, { checked: item.checked }).subscribe((response) => {
+    this.http.patch(this.source + 'list/' + item.id, { checked: item.checked }).subscribe((response) => {
       console.log(response);
     },
     (error) => {
@@ -34,15 +46,34 @@ export class ListComponent implements OnInit {
     );
   }
  
-  @ViewChild('popup') create!: CreateComponent;
-
-  showPopup() {
-    this.create.openPopup();
+  // Button show/hide
+  openPopup() {
+    this.isVisible = true;
   }
 
+  closePopup() {
+    this.isVisible = false;
+  }
+
+  // Create new task after submit
+  onSubmit() {
+
+    const data = this.taskForm.value.task;
+    if (data === "") return window.alert("Task is empty");
+    this.http.post(this.source + 'list', { task: data}).subscribe((response) => {
+      console.log(response);
+    },
+    (error) => {
+      console.error('Error posting task:', error);
+    }
+    );
+    location.reload();
+  }
+
+  // Delete task
   deleteTask(item: any) {
     if (window.confirm('Delete task: ' + item.task)) {
-      this.http.delete(`http://localhost:3000/api/list/` + item.id).subscribe((response) => {
+      this.http.delete(this.source + 'list/' + item.id).subscribe((response) => {
         console.log(response)
       },
       (error) => {
@@ -53,6 +84,7 @@ export class ListComponent implements OnInit {
     
   }
 
+  // Edit a task
   editTask(item: any) {
     this.router.navigate(['edit', item.id]);
   }
