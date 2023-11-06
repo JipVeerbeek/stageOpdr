@@ -1,11 +1,4 @@
 <div class="container">
-  <div>
-  <select id="categories" [(ngModel)]="selectedCategory">
-    <option value="0">Select All</option>
-    <option *ngFor="let item of categorieen" [value]="item.id">{{ item.categorie }}</option>
-    
-  </select>
-</div>
   <div class="tableContainer">
     <div class="tableBox">
       <div class="listHead">
@@ -15,7 +8,6 @@
       <table class="tableStyle">
         <tr *ngFor="let item of data">
           <ng-container *ngIf="item.checked == false">
-            <ng-container *ngIf="selectedCategory === 0 || item.categorie_id === selectedCategory">
             <td class="task">{{ item.task }}</td>
             <td class="categorie">{{ item.categorie }}</td>
             <td class="actionStyle">
@@ -31,7 +23,6 @@
               <button (click)="deleteTask(item)">delete</button>
             </td>
           </ng-container>
-        </ng-container>
         </tr>
       </table>
     </div>
@@ -43,7 +34,6 @@
       <table class="tableStyle">
         <tr *ngFor="let item of data">
           <ng-container *ngIf="item.checked == true">
-            <ng-container *ngIf="selectedCategory === 0 || item.categorie_id === selectedCategory">
             <td class="task">{{ item.task }}</td>
             <td class="categorie">{{ item.categorie }}</td>
             <td class="actionStyle">
@@ -59,11 +49,11 @@
               <button (click)="deleteTask(item)">delete</button>
             </td>
           </ng-container>
-        </ng-container>
         </tr>
       </table>
     </div>
   </div>
+  <div class="buttonsBox">
   <div class="addItem">
     <button (click)="openPopup()">Add new task</button>
     <div *ngIf="isVisible">
@@ -82,5 +72,13 @@
         </form>
       </div>
     </div>
+  </div>
+  <div class="filterCategorie">
+    <select id="categories" [(ngModel)]="selectedCategory" (change)="onCatagoryChange()">
+      <option value="0">Select All</option>
+      <option *ngFor="let item of categorieen" [value]="item.id">{{ item.categorie }}</option>
+      
+    </select>
+  </div>
   </div>
 </div>

@@ -18,7 +18,7 @@ const getCategorie = (req, res) => {
         return;
       } else {
         res.json(rows);
-        console.log(rows);
+        // console.log(rows);
       }
     });
   });

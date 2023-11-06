@@ -8,6 +8,7 @@ const listRouter = express.Router();
 
 listRouter.get("/list", getList);
 listRouter.get("/list/:id", getList);
+listRouter.get("/list/:category", getList);
 listRouter.post("/list", postList);
 listRouter.patch("/list/:id", patchList);
 listRouter.delete("/list/:id", deleteList);

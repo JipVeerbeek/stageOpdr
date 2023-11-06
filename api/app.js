@@ -9,6 +9,6 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api', listRouter);
-app.use('/api', categorieRouter)
+app.use('/api', categorieRouter);
 
 export default app;

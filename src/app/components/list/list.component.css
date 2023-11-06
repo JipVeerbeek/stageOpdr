@@ -51,3 +51,11 @@
 .task {
   width: 50%;
 }
+
+.filterCategorie {
+  padding: 10px;
+}
+
+.buttonsBox {
+  display: flex;
+}

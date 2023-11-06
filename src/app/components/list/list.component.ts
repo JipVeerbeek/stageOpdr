@@ -23,7 +23,7 @@ export class ListComponent {
   constructor(private http: HttpClient, private router: Router, private formBuilder: FormBuilder) {
     this.newTaskForm = this.formBuilder.group({
       task: [""],
-      categorie: []
+      categorie: [""]
     });
   }
 
@@ -31,22 +31,33 @@ export class ListComponent {
   ngOnInit() {
     this.http.get(this.source + 'list').subscribe((responseData) => {
       this.data = responseData;
-      console.log(this.data)
+      // console.log(this.data)
     }
     );
     this.http.get(this.source + 'categorie').subscribe((responseCategorieen) => {
       this.categorieen = responseCategorieen;
-      console.log(this.categorieen)
+      // console.log(this.categorieen)
     }
     );
   }
 
   refreshTaskList() {
-    this.http.get(this.source + 'list').subscribe((responseData) => {
+    let url = this.source + 'list';
+    if (this.selectedCategory !== 0) {
+      url += `?category=${this.selectedCategory}`;
+
+    }
+
+    this.http.get(url).subscribe((responseData) => {
       this.data = responseData;
+      console.log(this.data)
     });
   }
   
+  onCatagoryChange() {
+    this.refreshTaskList();
+
+  }
 
   // update true or false (done or todo)
   onCheckboxChange(item: any) {
@@ -75,12 +86,14 @@ export class ListComponent {
   onSubmit() {
 
     const taskData = this.newTaskForm.value.task;
-    const categorieData = this.newTaskForm.value.task;
+    const categorieData = this.newTaskForm.value.categorie;
+    // console.log(taskData + categorieData)
     if (taskData === "" || categorieData === 0) return window.alert("Task is empty");
     this.http.post(this.source + 'list', { task: taskData, categorie_id: categorieData}).subscribe((response) => {
-      console.log(response);
+      // console.log(response);
       
-      location.reload()
+      this.refreshTaskList();
+      this.closePopup();
     },
     (error) => {
       console.error('Error posting task:', error);
@@ -92,7 +105,7 @@ export class ListComponent {
   deleteTask(item: any) {
     if (window.confirm('Delete task: ' + item.task)) {
       this.http.delete(this.source + 'list/' + item.id).subscribe((response) => {
-        console.log(response)
+        // console.log(response)
         this.refreshTaskList();
       },
       (error) => {
