@@ -11,15 +11,19 @@ import { Router } from '@angular/router';
 export class ListComponent {
   
   data: any;
+  categorieen: any;
   source: string = "http://localhost:3000/api/"
   isVisible = false;
   task: string = "";
+  categorie: number = 0;
   newTaskForm: FormGroup;
+  selectedCategory: number = 0;
 
   // Constructor
   constructor(private http: HttpClient, private router: Router, private formBuilder: FormBuilder) {
     this.newTaskForm = this.formBuilder.group({
-      task: [""]
+      task: [""],
+      categorie: []
     });
   }
 
@@ -30,7 +34,19 @@ export class ListComponent {
       console.log(this.data)
     }
     );
+    this.http.get(this.source + 'categorie').subscribe((responseCategorieen) => {
+      this.categorieen = responseCategorieen;
+      console.log(this.categorieen)
+    }
+    );
   }
+
+  refreshTaskList() {
+    this.http.get(this.source + 'list').subscribe((responseData) => {
+      this.data = responseData;
+    });
+  }
+  
 
   // update true or false (done or todo)
   onCheckboxChange(item: any) {
@@ -58,16 +74,18 @@ export class ListComponent {
   // Create new task after submit
   onSubmit() {
 
-    const data = this.newTaskForm.value.task;
-    if (data === "") return window.alert("Task is empty");
-    this.http.post(this.source + 'list', { task: data}).subscribe((response) => {
+    const taskData = this.newTaskForm.value.task;
+    const categorieData = this.newTaskForm.value.task;
+    if (taskData === "" || categorieData === 0) return window.alert("Task is empty");
+    this.http.post(this.source + 'list', { task: taskData, categorie_id: categorieData}).subscribe((response) => {
       console.log(response);
+      
+      location.reload()
     },
     (error) => {
       console.error('Error posting task:', error);
     }
     );
-    location.reload();
   }
 
   // Delete task
@@ -75,11 +93,11 @@ export class ListComponent {
     if (window.confirm('Delete task: ' + item.task)) {
       this.http.delete(this.source + 'list/' + item.id).subscribe((response) => {
         console.log(response)
+        this.refreshTaskList();
       },
       (error) => {
         console.error('Error deleting task:', error);
       });
-      location.reload()
     }
     
   }
@@ -90,5 +108,4 @@ export class ListComponent {
   }
 
 }
-
 

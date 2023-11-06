@@ -1,4 +1,11 @@
 <div class="container">
+  <div>
+  <select id="categories" [(ngModel)]="selectedCategory">
+    <option value="0">Select All</option>
+    <option *ngFor="let item of categorieen" [value]="item.id">{{ item.categorie }}</option>
+    
+  </select>
+</div>
   <div class="tableContainer">
     <div class="tableBox">
       <div class="listHead">
@@ -8,7 +15,9 @@
       <table class="tableStyle">
         <tr *ngFor="let item of data">
           <ng-container *ngIf="item.checked == false">
+            <ng-container *ngIf="selectedCategory === 0 || item.categorie_id === selectedCategory">
             <td class="task">{{ item.task }}</td>
+            <td class="categorie">{{ item.categorie }}</td>
             <td class="actionStyle">
               <input
                 type="checkbox"
@@ -22,6 +31,7 @@
               <button (click)="deleteTask(item)">delete</button>
             </td>
           </ng-container>
+        </ng-container>
         </tr>
       </table>
     </div>
@@ -33,7 +43,9 @@
       <table class="tableStyle">
         <tr *ngFor="let item of data">
           <ng-container *ngIf="item.checked == true">
+            <ng-container *ngIf="selectedCategory === 0 || item.categorie_id === selectedCategory">
             <td class="task">{{ item.task }}</td>
+            <td class="categorie">{{ item.categorie }}</td>
             <td class="actionStyle">
               <input
                 type="checkbox"
@@ -47,6 +59,7 @@
               <button (click)="deleteTask(item)">delete</button>
             </td>
           </ng-container>
+        </ng-container>
         </tr>
       </table>
     </div>
@@ -54,10 +67,16 @@
   <div class="addItem">
     <button (click)="openPopup()">Add new task</button>
     <div *ngIf="isVisible">
-      <div class="container">
+      <div>
+        <br>
         <form [formGroup]="newTaskForm" (ngSubmit)="onSubmit()">
           <label for="task">Task:&nbsp;&nbsp;&nbsp;</label>
           <input type="text" formControlName="task"><br><br>
+          <label for="categorie">Categorie:&nbsp;&nbsp;&nbsp;</label>
+          <select id="category" formControlName="categorie">
+            <option value="" disabled selected>Select Categorie</option>
+            <option *ngFor="let item of categorieen" [value]="item.id">{{ item.categorie }}</option>
+          </select><br><br>
           <input type="submit" value="Add">&nbsp;
           <button (click)="closePopup()">Close</button>
         </form>
