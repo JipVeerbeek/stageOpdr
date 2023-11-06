@@ -13,7 +13,9 @@ export class EditComponent {
   editTaskForm: FormGroup;
   taskId!: number | null;
   source: string = 'http://localhost:3000/api/';
-  data: any = { task: '' };
+  taskData: any = { task: ''};
+  categorieData: any = {categorie: '' };
+  data: any;
 
   constructor(
     private router: Router,
@@ -23,6 +25,7 @@ export class EditComponent {
   ) {
     this.editTaskForm = this.formBuilder.group({
       task: [''],
+      categorie: ['']
     });
   }
 
@@ -35,13 +38,18 @@ export class EditComponent {
         this.taskId = +id;
       }
     });
-    this.http
-      .get(this.source + 'list/' + this.taskId)
-      .subscribe((responseData) => {
-        this.data = responseData;
-        // console.log(this.data)
-        this.editTaskForm.get('task')?.setValue(this.data[0].task);
-      });
+  
+    this.http.get(this.source + 'list/' + this.taskId).subscribe((responseData) => {
+      this.taskData = responseData;
+      this.editTaskForm.get('task')?.setValue(this.taskData[0].task);
+  
+      // Set the default value for categorie
+      this.editTaskForm.get('categorie')?.setValue(this.taskData[0].categorie);
+    });
+  
+    this.http.get(this.source + 'categorie').subscribe((responseData) => {
+      this.data = responseData;
+    });
   }
 
   onSubmit() {

@@ -8,6 +8,11 @@
     <form [formGroup]="editTaskForm" (ngSubmit)="onSubmit()">
       <label for="task">Task:&nbsp;&nbsp;&nbsp;</label>
       <input type="text" formControlName="task" /><br /><br />
+      <label for="categorie">Categorie:&nbsp;&nbsp;&nbsp;</label>
+      <select id="category" formControlName="categorie">
+        <option [value]="editTaskForm.get('categorie')?.value">{{ editTaskForm.get('categorie')?.value }}</option>
+        <option *ngFor="let item of data" [value]="item.id">{{ item.categorie }}</option>
+      </select><br><br>
       <input type="submit" value="Save" />&nbsp;
       <button (click)="backButton()">Cancel</button>
     </form>
