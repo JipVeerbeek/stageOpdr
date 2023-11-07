@@ -88,7 +88,7 @@ export class ListComponent {
     const taskData = this.newTaskForm.value.task;
     const categorieData = this.newTaskForm.value.categorie;
     // console.log(taskData + categorieData)
-    if (taskData === "" || categorieData === 0) return window.alert("Task is empty");
+    if (taskData === "" || categorieData === "") return window.alert("Task is empty");
     this.http.post(this.source + 'list', { task: taskData, categorie_id: categorieData}).subscribe((response) => {
       // console.log(response);
       

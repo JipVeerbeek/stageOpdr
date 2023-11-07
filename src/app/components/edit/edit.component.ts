@@ -55,33 +55,41 @@ export class EditComponent {
     });
   }
 
-  changeSelect(id: any) {
-    const newId = id - 1;
-    const getCategorieName = this.data[newId].categorie;
-    this.editTaskForm.get('categorie')?.setValue(getCategorieName);
-  }
-
   onSubmit() {
-    const task = this.editTaskForm.value.task;
-    const categorie = this.editTaskForm.value.categorie;
-    console.log(categorie)
-    if (task === '') return window.alert('Field is empty');
-
+    let task = this.editTaskForm.value.task;
+    let categorie = this.editTaskForm.value.categorie;
+    const originalCategorie = this.taskData[0].categorie; 
+    const originalTask = this.taskData[0].task; 
+    // console.log(originalCategorie + categorie)
+    if (task === '') {
+      window.alert('Field is empty');
+      return;
+    }
+    if (task === originalTask) {
+      task = originalTask;
+      
+    }
+    else if(categorie === originalCategorie) {
+      categorie = 'string'
+    }
     let data = {
       task,
-      categorie: typeof categorie !== 'string' ? categorie : undefined
-    }
-    console.log(data)
+      categorie: categorie === 'string' ? undefined : categorie,
+    };
+  
+    // console.log(data);
+  
     this.http
       .patch(this.source + 'list/' + this.taskId, data)
       .subscribe(
         (response) => {
-          console.log(response);
+          // console.log(response);
         },
         (error) => {
           console.error('Error posting task:', error);
-        },
+        }
       );
+  
     this.router.navigate(['']);
   }
 

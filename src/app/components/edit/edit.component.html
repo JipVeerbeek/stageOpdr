@@ -9,7 +9,7 @@
       <label for="task">Task:&nbsp;&nbsp;&nbsp;</label>
       <input type="text" formControlName="task" /><br /><br />
       <label for="categorie">Categorie:&nbsp;&nbsp;&nbsp;</label>
-      <select id="category" formControlName="categorie" (change)="changeSelect(editTaskForm.get('categorie')?.value)">
+      <select id="category" formControlName="categorie">
         <option [value]="editTaskForm.get('categorie')?.value" disabled selected>{{ editTaskForm.get('categorie')?.value }}</option>
         <option *ngFor="let item of data" [value]="item.id">{{ item.categorie }}</option>
       </select><br><br>
