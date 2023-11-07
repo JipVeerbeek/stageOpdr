@@ -1,27 +1,40 @@
 import { pool } from "../connection.js";
 
 const patchList = (req, res) => {
-  const checked = req.body.checked;
-  const task = req.body.task
   const id = req.params.id;
-  let query = "";
-  let values = [];
+  const { checked, task, categorie } = req.body;
 
-  if (id === undefined) {
+  if (id === undefined || (checked === undefined && task === undefined && categorie === undefined)) {
     return res.status(400).json({ error: "Missing parameters" });
   }
+
+
+  let query = "UPDATE list SET ";
+  let values = [];
+
+
   if (checked !== undefined) {
-    query = "UPDATE list SET checked = ? WHERE id = ?";
-    values = [checked, id];
+    query += "checked = ?, "
+    values.push(checked);
   }
   if (task !== undefined) {
-    query = "UPDATE list SET task = ? WHERE id = ?";
-    values = [task, id];
+    query += "task = ?, ";
+    values.push(task);
   }
+  if (categorie !== undefined) {
+    query += "categorie_id = ?, ";
+    values.push(categorie);
+  }
+
+  query = query.slice(0, -2)
+  query += " WHERE id = ?"
+  
+  values.push(id)
 
   pool.getConnection((err, connection) => {
     if (err) return res.status(400).json({ error: "connection_error" });
-    
+    // console.log("Query:", query);
+    // console.log("Values:", values);
     connection.query(query, values, (err, result) => {
       connection.release();
 

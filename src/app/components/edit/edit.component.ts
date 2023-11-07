@@ -16,6 +16,7 @@ export class EditComponent {
   taskData: any = { task: ''};
   categorieData: any = {categorie: '' };
   data: any;
+  originalData: any = {};
 
   constructor(
     private router: Router,
@@ -28,7 +29,6 @@ export class EditComponent {
       categorie: ['']
     });
   }
-
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
@@ -38,13 +38,16 @@ export class EditComponent {
         this.taskId = +id;
       }
     });
-  
+    
     this.http.get(this.source + 'list/' + this.taskId).subscribe((responseData) => {
       this.taskData = responseData;
+      console.log(this.taskData)
+      this.originalData = responseData;
       this.editTaskForm.get('task')?.setValue(this.taskData[0].task);
-  
+      
       // Set the default value for categorie
       this.editTaskForm.get('categorie')?.setValue(this.taskData[0].categorie);
+      console.log(this.editTaskForm.value)
     });
   
     this.http.get(this.source + 'categorie').subscribe((responseData) => {
@@ -52,11 +55,25 @@ export class EditComponent {
     });
   }
 
+  changeSelect(id: any) {
+    const newId = id - 1;
+    const getCategorieName = this.data[newId].categorie;
+    this.editTaskForm.get('categorie')?.setValue(getCategorieName);
+  }
+
   onSubmit() {
-    const data = this.editTaskForm.value.task;
-    if (data === '') return window.alert('Field is empty');
+    const task = this.editTaskForm.value.task;
+    const categorie = this.editTaskForm.value.categorie;
+    console.log(categorie)
+    if (task === '') return window.alert('Field is empty');
+
+    let data = {
+      task,
+      categorie: typeof categorie !== 'string' ? categorie : undefined
+    }
+    console.log(data)
     this.http
-      .patch(this.source + 'list/' + this.taskId, { task: data })
+      .patch(this.source + 'list/' + this.taskId, data)
       .subscribe(
         (response) => {
           console.log(response);
