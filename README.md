@@ -13,26 +13,26 @@ Open a new terminal and open the api folder `cd api`. When you opened the folder
 ## SQL code for database
 
 ```
--- Maak de database aan als deze nog niet bestaat
+-- create database
 CREATE DATABASE IF NOT EXISTS todolist;
 
--- Gebruik de aangemaakte database
+-- use created database
 USE todolist;
 
--- Maak de tabel `categorieen` aan
+-- create table `categorieen`
 CREATE TABLE IF NOT EXISTS categorieen (
     id int(11) NOT NULL AUTO_INCREMENT,
     categorie varchar(100) NOT NULL,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Voeg gegevens toe aan de `categorieen` tabel
+-- add data to table `categorieen`
 INSERT INTO categorieen (categorie) VALUES
 ( 'tuin'),
 ( 'huis'),
 ( 'kantoor');
 
--- Maak de tabel `list` aan
+-- create table `list`
 CREATE TABLE IF NOT EXISTS list (
     id int(11) NOT NULL AUTO_INCREMENT,
     task varchar(500) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS list (
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Voeg gegevens toe aan de `list` tabel
+-- add data to table `list`
 INSERT INTO list (task, categorie_id, checked) VALUES
 ( 'Taak 1', 1, 0),
 ( 'Taak 2', 1, 1),
