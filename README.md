@@ -12,7 +12,7 @@ Open a new terminal and open the api folder `cd api`. When you opened the folder
 
 ## SQL code for database
 
-`
+```
 -- phpMyAdmin SQL Dump
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
@@ -120,7 +120,7 @@ COMMIT;
 /_!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT _/;
 /_!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS _/;
 /_!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION _/;
-`
+```
 
 ## Further help
 
